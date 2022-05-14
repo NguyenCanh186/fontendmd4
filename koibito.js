@@ -17,7 +17,7 @@ function showAllSupplier(){
         <td>${supplier[i].weight + " kg"}</td>
         <td id="${supplier[i].id}"></td>
         <td><button class="btn btn-primary" onclick="deleteBook(${supplier[i].id})" >Add to cart</button></td>
-        <td><button class="btn btn-primary" onclick="showInformation(${supplier[i].id})">View</button></td>
+        <td><button class="btn btn-primary" onclick="showInformation(${supplier[i].id}) showServiceById(${supplier[i].id}) location.href="#information"">View</button></td>
     </tr>`
 
             }
@@ -87,10 +87,10 @@ function showAllStatus(){
             let tt1 = "";
             let tt2 = "";
             for (let i = 0; i < status.length; i++) {
-                if (status[0].status = true){
+                if (status[0].status == true){
                     tt1 = "ready"
                 }
-                if (status[1].status = true){
+                if (status[1].status == true){
                     tt2 = "busy"
                 }
             }
@@ -105,27 +105,61 @@ showAllStatus()
 function showInformation(){
     $.ajax({
         type:"GET",
-        url:`http://localhost:8080/koibito/findOneSupplier/1`,
+        url:`http://localhost:8080/koibito/findOneSupplier/3`,
         success:function (supplier){
-            $('#name1').val(supplier.name)
-            $('#email1').val(supplier.email)
-            $('#gender1').val(supplier.gender)
-            $('#hobby1').val(supplier.hobby)
-            $('#personal1').val(supplier.personal)
-            $('#note1').val(supplier.note)
-            $('#height1').val(supplier.height)
-            $('#weight1').val(supplier.weight)
-            $('#phone1').val(supplier.phone)
-            $('#age1').val(supplier.age)
-            $('#address1').val(supplier.address)
-            $('#service1').val(supplier.serviceSet)
-            $('#status1').val(supplier.status)
-            let img = `<img src="http://localhost:8080/image/${supplier.image}">`
+            // $('#name1').innerHTML(supplier.name)
+            $('#name1').html(supplier.name)
+            $('#name2').html(supplier.name)
+            $('#name3').html(supplier.name)
+            // document.getElementById("name1").innerHTML=supplier.name
+            $('#email1').html(supplier.email)
+            $('#email2').html(supplier.email)
+            $('#gender1').html(supplier.gender)
+            $('#hobby1').html(supplier.hobby)
+            $('#hobby2').html(supplier.hobby)
+            $('#personal1').html(supplier.personal)
+            $('#personal2').html(supplier.personal)
+            $('#note1').html(supplier.note)
+            $('#note2').html(supplier.note)
+            $('#height1').html(supplier.height)
+            $('#height2').html(supplier.height)
+            $('#weight1').html(supplier.weight)
+            $('#weight2').html(supplier.weight)
+            $('#phone1').html(supplier.phone)
+            $('#phone2').html(supplier.phone)
+            $('#age1').html(supplier.age)
+            $('#age2').html(supplier.age)
+            $('#address1').html(supplier.address)
+            $('#address2').html(supplier.address)
+
+            $('#status1').html(supplier.status)
+            let img = `<img class="img-fluid w-100 rounded-circle shadow-sm" src="http://localhost:8080/image/${supplier.image}" alt="">`
             $(`#showImg`).html(img)
+            let img1 = `<img class="img-fluid rounded w-100" src="http://localhost:8080/image/${supplier.image}" alt="">`
+            $(`#showImg1`).html(img1)
+
         }
     })
 }
 showInformation()
+
+function showServiceById(){
+    $.ajax({
+        type:"GET",
+        url:`http://localhost:8080/koibito/findPriceBySupplierId/3`,
+        success: function (service) {
+            let content = "";
+            for (let i = 0; i < service.length; i++) {
+                content += `<tr>
+                    <td align="center"> <h3>${service[i].name}</h3></td>
+                    <td align="center"><h3>${service[i].price} USD</h3></td>
+                     </tr>`
+                $("#list-service").html(content);
+            }
+        }
+    })
+}
+showServiceById()
 function addNewSupplier() {
     //lay du lieu
     let name = $('#name').val();

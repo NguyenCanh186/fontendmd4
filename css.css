@@ -360,3 +360,41 @@ footer p a:hover {
     color: #9f26aa;
     text-decoration: none;
 }
+
+
+
+.b-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    min-width: 500px;
+    box-shadow: 0 0 20px rgb(64 64 64 / 24%);
+}
+.b-table thead tr {
+    background-color: #c50101;
+    color: #ffffff;
+    text-align: left;
+}
+.b-table th,
+.b-table td {
+    padding: 12px 15px;
+}
+.b-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.b-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.b-table tbody tr:last-of-type {
+    border-bottom: 2px solid #d10030;
+}
+.b-table tbody tr.active-row {
+    font-weight: 700;
+    color: #d10030;
+}
+
+
+
+
+
+
